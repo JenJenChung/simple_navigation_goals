@@ -1,8 +1,9 @@
 #include <ros/ros.h>
+#include "geometry_msgs/Twist.h"
 #include "geometry_msgs/Pose.h"
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
-#include "tf/Quaternion.h"
+#include <tf/transform_datatypes.h>
 
 #define PI 3.14159265358979
 
@@ -27,10 +28,10 @@ void goalCallback(const geometry_msgs::Twist& msg)
   goal.target_pose.pose.position.x = msg.linear.x ;
   goal.target_pose.pose.position.y = msg.linear.y ;
   goal.target_pose.pose.position.z = msg.linear.z ;
-  goal.target_pose.pose.orientation.x = q.quaternion.x ;
-  goal.target_pose.pose.orientation.y = q.quaternion.y ;
-  goal.target_pose.pose.orientation.z = q.quaternion.z ;
-  goal.target_pose.pose.orientation.w = q.quaternion.w ;
+  goal.target_pose.pose.orientation.x = static_cast<double>(q.x) ;
+  goal.target_pose.pose.orientation.y = static_cast<double>(q.y) ;
+  goal.target_pose.pose.orientation.z = static_cast<double>(q.z) ;
+  goal.target_pose.pose.orientation.w = static_cast<double>(q.w) ;
   
   ROS_INFO("Sending goal") ;
   ac.sendGoal(goal) ;
