@@ -28,10 +28,10 @@ void goalCallback(const geometry_msgs::Twist& msg)
   goal.target_pose.pose.position.x = msg.linear.x ;
   goal.target_pose.pose.position.y = msg.linear.y ;
   goal.target_pose.pose.position.z = msg.linear.z ;
-  goal.target_pose.pose.orientation.x = static_cast<double>(q.x) ;
-  goal.target_pose.pose.orientation.y = static_cast<double>(q.y) ;
-  goal.target_pose.pose.orientation.z = static_cast<double>(q.z) ;
-  goal.target_pose.pose.orientation.w = static_cast<double>(q.w) ;
+  goal.target_pose.pose.orientation.x = q.x() ;
+  goal.target_pose.pose.orientation.y = q.y() ;
+  goal.target_pose.pose.orientation.z = q.z() ;
+  goal.target_pose.pose.orientation.w = q.w() ;
   
   ROS_INFO("Sending goal") ;
   ac.sendGoal(goal) ;

@@ -18,11 +18,11 @@ int main(int argc, char **argv)
   goal.linear.y = temp;
   ros::param::get("/simple_navigation_goals/position/z", temp);
   goal.linear.z = temp;
-  ros::param::get("/simple_navigation_goals/orientation/x", temp);
+  ros::param::get("/simple_navigation_goals/orientation/psi", temp);
   goal.angular.x = temp;
-  ros::param::get("/simple_navigation_goals/orientation/y", temp);
+  ros::param::get("/simple_navigation_goals/orientation/theta", temp);
   goal.angular.y = temp;
-  ros::param::get("/simple_navigation_goals/orientation/z", temp);
+  ros::param::get("/simple_navigation_goals/orientation/phi", temp);
   goal.angular.z = temp;
   
   // Publish the message
