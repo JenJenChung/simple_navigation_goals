@@ -31,7 +31,7 @@ void goalCallback(const geometry_msgs::Twist& msg)
   goal.target_pose.pose.orientation.x = q.x() ;
   goal.target_pose.pose.orientation.y = q.y() ;
   goal.target_pose.pose.orientation.z = q.z() ;
-  goal.target_pose.pose.orientation.z = q.w() ;
+  goal.target_pose.pose.orientation.w = q.w() ;
   
   ROS_INFO("Sending goal") ;
   ac.sendGoal(goal) ;
