@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include "geometry_msgs/Pose.h"
+#include "geometry_msgs/Twist.h"
 
 int main(int argc, char **argv)
 {
@@ -7,25 +7,23 @@ int main(int argc, char **argv)
 
   // Set up publisher
   ros::NodeHandle nHandle ;
-  ros::Publisher pub = nHandle.advertise<geometry_msgs::Pose>("map_goal", 50) ;
+  ros::Publisher pub = nHandle.advertise<geometry_msgs::Twist>("map_goal", 50) ;
   
-  geometry_msgs::Pose goal ;
+  geometry_msgs::Twist goal ;
   
   double temp = 0;
   ros::param::get("/simple_navigation_goals/position/x", temp);
-  goal.position.x = temp;
+  goal.linear.x = temp;
   ros::param::get("/simple_navigation_goals/position/y", temp);
-  goal.position.y = temp;
+  goal.linear.y = temp;
   ros::param::get("/simple_navigation_goals/position/z", temp);
-  goal.position.z = temp;
-  ros::param::get("/simple_navigation_goals/orientation/x", temp);
-  goal.orientation.x = temp;
-  ros::param::get("/simple_navigation_goals/orientation/y", temp);
-  goal.orientation.y = temp;
-  ros::param::get("/simple_navigation_goals/orientation/z", temp);
-  goal.orientation.z = temp;
-  ros::param::get("/simple_navigation_goals/orientation/w", temp);
-  goal.orientation.w = temp;
+  goal.linear.z = temp;
+  ros::param::get("/simple_navigation_goals/orientation/phi", temp);
+  goal.angular.x = temp;
+  ros::param::get("/simple_navigation_goals/orientation/theta", temp);
+  goal.angular.y = temp;
+  ros::param::get("/simple_navigation_goals/orientation/psi", temp);
+  goal.angular.z = temp;
   
   // Publish the message
   pub.publish(goal);

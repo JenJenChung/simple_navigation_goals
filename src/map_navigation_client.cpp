@@ -1,9 +1,13 @@
 #include <ros/ros.h>
+#include "geometry_msgs/Twist.h"
 #include "geometry_msgs/Pose.h"
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
+#include <tf/transform_datatypes.h>
 
-void goalCallback(const geometry_msgs::Pose& msg)
+#define PI 3.14159265358979
+
+void goalCallback(const geometry_msgs::Twist& msg)
 {
   //tell the action client that we want to spin a thread by default
   actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac("move_base",true) ;
@@ -17,14 +21,17 @@ void goalCallback(const geometry_msgs::Pose& msg)
   
   goal.target_pose.header.frame_id = "map" ;
   goal.target_pose.header.stamp = ros::Time::now() ;
+  
+  tf::Quaternion q ;  
+  q.setEuler(msg.angular.z*PI/180.0, msg.angular.y*PI/180.0, msg.angular.x*PI/180.0) ;
 
-  goal.target_pose.pose.position.x = msg.position.x ;
-  goal.target_pose.pose.position.y = msg.position.y ;
-  goal.target_pose.pose.position.z = msg.position.z ;
-  goal.target_pose.pose.orientation.x = msg.orientation.x ;
-  goal.target_pose.pose.orientation.y = msg.orientation.y ;
-  goal.target_pose.pose.orientation.z = msg.orientation.z ;
-  goal.target_pose.pose.orientation.w = msg.orientation.w ;
+  goal.target_pose.pose.position.x = msg.linear.x ;
+  goal.target_pose.pose.position.y = msg.linear.y ;
+  goal.target_pose.pose.position.z = msg.linear.z ;
+  goal.target_pose.pose.orientation.x = q.x() ;
+  goal.target_pose.pose.orientation.y = q.y() ;
+  goal.target_pose.pose.orientation.z = q.z() ;
+  goal.target_pose.pose.orientation.z = q.w() ;
   
   ROS_INFO("Sending goal") ;
   ac.sendGoal(goal) ;
