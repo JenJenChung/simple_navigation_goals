@@ -23,7 +23,7 @@ void goalCallback(const geometry_msgs::Twist& msg)
   goal.target_pose.header.stamp = ros::Time::now() ;
   
   tf::Quaternion q ;  
-  q.setEuler(msg.angular.z*PI/180.0, msg.angular.y*PI/180.0, msg.angular.x*PI/180.0) ;
+  q.setEuler(msg.angular.x*PI/180.0, msg.angular.y*PI/180.0, msg.angular.z*PI/180.0) ;
 
   goal.target_pose.pose.position.x = msg.linear.x ;
   goal.target_pose.pose.position.y = msg.linear.y ;
