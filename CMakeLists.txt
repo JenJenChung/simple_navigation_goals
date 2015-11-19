@@ -24,11 +24,3 @@ add_dependencies(base_link_navigation_client ${catkin_EXPORTED_TARGETS})
 add_executable(map_navigation_client src/map_navigation_client.cpp)
 target_link_libraries(map_navigation_client ${catkin_LIBRARIES})
 add_dependencies(map_navigation_client ${catkin_EXPORTED_TARGETS})
-
-add_executable(publish_base_link_goal src/publish_base_link_goal.cpp)
-target_link_libraries(publish_base_link_goal ${catkin_LIBRARIES})
-add_dependencies(publish_base_link_goal ${catkin_EXPORTED_TARGETS})
-
-add_executable(publish_map_goal src/publish_map_goal.cpp)
-target_link_libraries(publish_map_goal ${catkin_LIBRARIES})
-add_dependencies(publish_map_goal ${catkin_EXPORTED_TARGETS})
