@@ -19,7 +19,7 @@ void goalCallback(const geometry_msgs::Twist& msg)
   
   move_base_msgs::MoveBaseGoal goal ;
   
-  goal.target_pose.header.frame_id = "map" ;
+  goal.target_pose.header.frame_id = "/map" ;
   goal.target_pose.header.stamp = ros::Time::now() ;
   
   tf::Quaternion q ;  
