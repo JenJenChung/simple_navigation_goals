@@ -24,3 +24,7 @@ add_dependencies(base_link_navigation_client ${catkin_EXPORTED_TARGETS})
 add_executable(map_navigation_client src/map_navigation_client.cpp)
 target_link_libraries(map_navigation_client ${catkin_LIBRARIES})
 add_dependencies(map_navigation_client ${catkin_EXPORTED_TARGETS})
+
+add_executable(controller_spin_recover src/controller_spin_recover.cpp)
+target_link_libraries(controller_spin_recover ${catkin_LIBRARIES})
+add_dependencies(controller_spin_recover ${catkin_EXPORTED_TARGETS})
